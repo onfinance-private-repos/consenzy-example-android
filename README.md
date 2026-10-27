@@ -106,14 +106,12 @@ authenticated the parent.
 ## Architecture: why there are no API keys in the app
 
 ```
- ┌──────────── app ────────────┐        ┌──────── your backend ────────┐        ┌──── Consenzy ────┐
- │ sign-in (your own login)    │──────▶ │ POST /session                │──────▶ │ POST /v1/        │
- │                             │ ◀───── │   org key cdm_… (server only)│ ◀───── │ principal-sessions│
- │ ConsentSession(             │  cps_… │                              │        │                  │
- │   sessionProvider = mint)   │        │ POST /consent-check          │──────▶ │ POST /v1/        │
- │      │                      │        │   before processing data     │        │ consents/check   │
- │      └── /v1/me/* with cps_ ┼────────┼──────────────────────────────┼──────▶ │ /v1/me/*         │
- └─────────────────────────────┘        └──────────────────────────────┘        └──────────────────┘
+app                            your backend (holds cdm_… key)        Consenzy
+───                            ──────────────────────────────        ────────
+sign in (your login)  ───────▶ POST /session        ───────────────▶ POST /v1/principal-sessions
+                      ◀─────── cps_… token + base_url ◀─────────────
+"send me offers"      ───────▶ POST /consent-check  ───────────────▶ POST /v1/consents/check
+ConsentSession (cps_… only) ─────────────────────────────────────────▶ /v1/me/* (notice, consents, requests)
 ```
 
 - **Org API keys (`cdm_…`) never ship in an app.** Anything in an APK can be extracted. An org key can mint sessions
