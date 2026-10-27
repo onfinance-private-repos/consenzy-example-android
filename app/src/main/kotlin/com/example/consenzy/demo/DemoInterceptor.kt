@@ -14,7 +14,7 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Buffer
 
 /**
- * An OkHttp application [Interceptor] that answers the Consenzy principal API (`/v1/me/*`) from a [DemoStore]
+ * An OkHttp application [Interceptor] that answers the Consenzy principal API (`/v1/me/...`) from a [DemoStore]
  * instead of the network.
  *
  * It is passed to the SDK as `ConsentSessionOptions(okHttpClient = …)`, so the **real** SDK code path runs: token

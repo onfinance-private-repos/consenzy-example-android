@@ -23,7 +23,7 @@ import java.util.UUID
 class DemoResult(val status: Int, val body: JsonElement?)
 
 /**
- * Kotlin port of the example session server's `src/mock.js`: the principal API (`/v1/me/*`) plus the two org-key
+ * Kotlin port of the example session server's `src/mock.js`: the principal API (`/v1/me/...`) plus the two org-key
  * calls a backend makes (minting a session, checking consent). It follows the rules the example journeys exercise:
  *
  * - notices in `en` and `hi`, falling back to English for any other language;
